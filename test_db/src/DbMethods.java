@@ -50,6 +50,19 @@ public class DbMethods {
         }
     }
 
+    public void Insert(String kod, String nev, String szid, String lak, String iq){
+        String sqlp="insert into emp values ('" +kod+"', '"+ nev+"', '"+ szid+"', '"+ lak+"', '"+ iq+"');";
+        try{
+            s=conn.createStatement();
+            s.execute(sqlp);
+            SM("insert OK!");
+
+        }catch(SQLException e){
+            SM("JDB Insert: "+ e.getMessage());
+        }
+    }
+
+
     public void Reg() {
         try {
             Class.forName("org.sqlite.JDBC");
