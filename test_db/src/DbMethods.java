@@ -1,10 +1,3 @@
-package com.company;/*
-– Driver regisztráció
-– Kapcsolódás
-– Lekapcsolódás
-– Lekérdezés
- */
-
 import javax.swing.*;
 import java.sql.*;
 
@@ -40,7 +33,8 @@ public class DbMethods {
                 szid=rs.getString("szulido");
                 lak= rs.getString("lakohely");
                 iq=rs.getInt("iq");
-                SM(kod+nev+szid+lak+iq);
+                //System.out.println("Lekérdezés:");
+                SM(kod +" "+nev+" "+szid+" "+lak+" "+iq);
             }
         }catch (SQLException e){
             SM(e.getMessage());
@@ -70,6 +64,6 @@ public class DbMethods {
 
     public void SM(String msg)
     {
-        //System.out.println(msg);
-        JOptionPane.showMessageDialog(null, msg, "ABKezelő üzenet", 2);
+        System.out.println(msg);
+        //JOptionPane.showMessageDialog(null, msg, "ABKezelő üzenet", 2);
     }}

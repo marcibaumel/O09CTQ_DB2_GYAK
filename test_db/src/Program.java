@@ -1,5 +1,3 @@
-package com.company;
-
 public class Program {
 
     static  DbMethods dbm= new DbMethods();
