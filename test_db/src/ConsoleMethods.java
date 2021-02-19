@@ -10,4 +10,15 @@ public class ConsoleMethods
         data=scanInput.nextLine();
         return data;
     }
+
+    public int ReadID(String s){
+        int data;
+        System.out.println(s);
+        data = scanInput.nextInt();
+        if(data<=0){
+            return 0;
+        }
+        return data;
+    }
+
 }

@@ -51,7 +51,7 @@ public class DbMethods {
     }
 
     public void Insert(String kod, String nev, String szid, String lak, String iq){
-        String sqlp="insert into emp values ('" +kod+"', '"+ nev+"', '"+ szid+"', '"+ lak+"', '"+ iq+"');";
+        String sqlp="insert into emp values (" +kod+", '"+ nev+"', '"+ szid+"', '"+ lak+"', '"+ iq+"')";
         try{
             s=conn.createStatement();
             s.execute(sqlp);
@@ -74,6 +74,33 @@ public class DbMethods {
         }
 
     }
+
+    public void deletById(int id){
+        String sqlp="DELETE FROM emp WHERE (kod="+id+");";
+        try{
+            s=conn.createStatement();
+            s.execute(sqlp);
+            SM("Delete OK!");
+
+        }catch(SQLException e){
+            SM("JDB delete: "+ e.getMessage());
+        }
+    }
+
+    public void changeIqByID(int id, int newIq){
+        String sqlp="UPDATE emp \n" +
+                    "SET iq="+newIq+"\n" +
+                    "WHERE (kod="+id+");";
+        try{
+            s=conn.createStatement();
+            s.execute(sqlp);
+            SM("Change OK!");
+
+        }catch(SQLException e){
+            SM("JDB change: "+ e.getMessage());
+        }
+    }
+
 
     public void SM(String msg)
     {
