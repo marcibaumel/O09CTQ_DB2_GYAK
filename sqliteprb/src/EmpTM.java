@@ -1,10 +1,13 @@
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
 public class EmpTM extends DefaultTableModel{
 
+
     public EmpTM (Object fildNames[], int rows){
         super(fildNames, rows);
+
     }
 
     public boolean isCellEditable(int row, int col) {
