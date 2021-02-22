@@ -1,60 +1,122 @@
 import javax.swing.*;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableRowSorter;
-import java.awt.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class EmpList extends JFrame {
-    private JButton btnBezar;
-    private JTable tabla;
-    private JPanel mainTablePanel;
+public class EmpList  {
 
-    /*
-    public EmpList(JFrame f, EmpTM betm) {
-        super(f, "Dolgozók listája", true);
-        etm = betm;
-    }
-    */
-    
-    DbMethods dbm=new DbMethods();
+    private JPanel controlPanel;
+    private JButton BezarBtn;
+    private JTable showTable;
     private EmpTM etm;
+    private Statement s = null;
+    private Connection conn= null;
+    private ResultSet rs= null;
 
 
-    public EmpList(String title){
+    public EmpList() {
 
+        //createTable();
 
-        super(title);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setContentPane(mainTablePanel);
-        tabla = new JTable(etm);
-        this.setPreferredSize(new Dimension(640, 480));
-        this.pack();
+        Object[][] data={
+                {"The Dark Knight", 2008, 9.0, 1886938},
+                {"Star Wars", 2001, 8.1, 1313},
+                {"Inception", 1990, 10, 3131344}
 
-        TableColumn tc = null;
-        for (int i = 0; i < 6; i++) {
-            tc = tabla.getColumnModel().getColumn(i);
-            if (i==0 || i==1 || i==5) tc.setPreferredWidth(30);
-            else {tc.setPreferredWidth(100);}
-        }
+        };
 
-        tabla.setAutoCreateRowSorter(true);
-        TableRowSorter<EmpTM> trs =
-                (TableRowSorter<EmpTM>)tabla.getRowSorter();
-        trs.setSortable(0, false);
+        showTable.setModel(new DefaultTableModel(
+                data,
+                new String[]{"Title", "Year", "Rating", "Num Votes"}
+        ));
+        TableColumnModel columns= showTable.getColumnModel();
+        columns.getColumn(0).setMaxWidth(250);
 
+        DefaultTableCellRenderer ceneterRender=new DefaultTableCellRenderer();
+        ceneterRender.setHorizontalAlignment(JLabel.CENTER);
+        columns.getColumn(1).setCellRenderer(ceneterRender);
+        columns.getColumn(2).setCellRenderer(ceneterRender);
+        columns.getColumn(3).setCellRenderer(ceneterRender);
 
-        btnBezar.addActionListener(new ActionListener() {
+        BezarBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); setVisible(false);
+                System.exit(0);
             }
         });
     }
 
-    public static void main(String[] args){
-        JFrame frame= new EmpList("Tabla");
-
-        frame.setVisible(true);
+    public JPanel getRootPanel(){
+        return controlPanel;
     }
+
+    public void createTable(){
+
+    }
+
+    public void CreateTable(){
+
+        /*
+        Object emptmn[]={"Jel", "Kód"};
+        EmpTM etm= new EmpTM(emptmn, 0);
+        String nev="", szid="", lak="", x="/t";
+        int kod=0, iq=0;
+        String sqlp="select kod, nev, szulido, lakohely, iq from emp";
+        try{
+            s=conn.createStatement();
+            rs=s.executeQuery(sqlp);
+            while(rs.next()){
+                kod=rs.getInt("kod");
+                nev=rs.getString("nev");
+                szid=rs.getString("szulido");
+                lak= rs.getString("lakohely");
+                iq=rs.getInt("iq");
+                //System.out.println("Lekérdezés:");
+                //SM(kod +" "+nev+" "+szid+" "+lak+" "+iq);
+                etm.addRow(new Object[]{false, kod, szid, lak, iq});
+            }
+        }catch (SQLException e){
+            SM(e.getMessage());
+        }
+        return etm;
+         */
+
+        Object[][] data={
+                {"The Dark Knight", 2008, 9.0, 1886938},
+                {"Star Wars", 2001, 8.1, 1313},
+                {"Inception", 1990, 10, 3131344}
+
+        };
+
+        showTable.setModel(new DefaultTableModel(
+                data,
+                new String[]{"Title", "Year", "Rating", "Num Votes"}
+        ));
+        TableColumnModel columns= showTable.getColumnModel();
+        columns.getColumn(0).setMaxWidth(250);
+
+        DefaultTableCellRenderer ceneterRender=new DefaultTableCellRenderer();
+        ceneterRender.setHorizontalAlignment(JLabel.CENTER);
+        columns.getColumn(1).setCellRenderer(ceneterRender);
+        columns.getColumn(2).setCellRenderer(ceneterRender);
+        columns.getColumn(3).setCellRenderer(ceneterRender);
+
+    }
+
+    public void SM(String msg)
+    {
+        //System.out.println(msg);
+        JOptionPane.showMessageDialog(null, msg, "ABKezelő üzenet", 2);
+    }
+
 }
+
+
+
+
