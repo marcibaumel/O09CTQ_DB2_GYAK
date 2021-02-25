@@ -13,11 +13,10 @@ public class Main {
     }
     private static void createGUI() {
 
-        EmpList ui= new EmpList();
+        ABKezeloPrg ui= new ABKezeloPrg("Ablak");
 
         JPanel root = ui.getRootPanel();
-        JFrame frame= new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame frame=new JFrame();
         frame.setContentPane(root);
         frame.pack();
         frame.setLocationRelativeTo(null);

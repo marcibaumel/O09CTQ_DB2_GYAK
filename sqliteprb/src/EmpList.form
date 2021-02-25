@@ -8,7 +8,20 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="3def2" class="javax.swing.JButton" binding="BezarBtn">
+      <scrollpane id="913c7">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="5780e" class="javax.swing.JTable" binding="tabla">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="5ce40" class="javax.swing.JButton" binding="btnBezar">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -16,19 +29,6 @@
           <text value="Bezár"/>
         </properties>
       </component>
-      <scrollpane id="86c37">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-        <border type="none"/>
-        <children>
-          <component id="51ba4" class="javax.swing.JTable" binding="showTable">
-            <constraints/>
-            <properties/>
-          </component>
-        </children>
-      </scrollpane>
     </children>
   </grid>
 </form>

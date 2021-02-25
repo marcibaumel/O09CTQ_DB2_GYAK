@@ -16,9 +16,11 @@ public class ABKezeloPrg extends JFrame{
 
     public ABKezeloPrg(String title){
         super(title);
+
+        this.setPreferredSize(new Dimension(400, 400));
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPanel);
-        this.setPreferredSize(new Dimension(640, 480));
         this.pack();
 
         btnReg.addActionListener(new ActionListener() {
@@ -27,12 +29,15 @@ public class ABKezeloPrg extends JFrame{
                 dbm.Reg();
             }
         });
+
         listaBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                EmpList el = new EmpList("Teszt");
+                el.setVisible(true);
             }
         });
+
         Kilépés.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,10 +46,17 @@ public class ABKezeloPrg extends JFrame{
         });
     }
 
+    /*
     public static void main(String[] args){
         JFrame frame= new ABKezeloPrg("AbKezeloProg");
 
         frame.setVisible(true);
+    }
+    */
+
+
+    public JPanel getRootPanel(){
+        return mainPanel;
     }
 
 }

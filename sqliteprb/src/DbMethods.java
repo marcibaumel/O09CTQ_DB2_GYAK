@@ -6,7 +6,7 @@ public class DbMethods {
     private Statement s = null;
     private Connection conn= null;
     private ResultSet rs= null;
-    private EmpList empL;
+
 
 
     public void Connect() {
@@ -42,32 +42,6 @@ public class DbMethods {
         }catch (SQLException e){
             SM(e.getMessage());
         }
-    }
-
-    public EmpTM CreateTable(){
-
-        Object emptmn[]={"Jel", "Kód"};
-        EmpTM etm= new EmpTM(emptmn, 0);
-        String nev="", szid="", lak="", x="/t";
-        int kod=0, iq=0;
-        String sqlp="select kod, nev, szulido, lakohely, iq from emp";
-        try{
-            s=conn.createStatement();
-            rs=s.executeQuery(sqlp);
-            while(rs.next()){
-                kod=rs.getInt("kod");
-                nev=rs.getString("nev");
-                szid=rs.getString("szulido");
-                lak= rs.getString("lakohely");
-                iq=rs.getInt("iq");
-                //System.out.println("Lekérdezés:");
-                //SM(kod +" "+nev+" "+szid+" "+lak+" "+iq);
-                etm.addRow(new Object[]{false, kod, szid, lak, iq});
-            }
-        }catch (SQLException e){
-            SM(e.getMessage());
-        }
-        return etm;
     }
 
 

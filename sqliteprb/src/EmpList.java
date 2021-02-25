@@ -1,104 +1,70 @@
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
-public class EmpList  {
-
+public class EmpList extends JFrame {
     private JPanel controlPanel;
-    private JButton BezarBtn;
-    private JTable showTable;
-    private EmpTM etm;
-    private Statement s = null;
-    private Connection conn= null;
-    private ResultSet rs= null;
+    private JButton btnBezar;
+    private JTable tabla;
 
 
-    public EmpList() {
 
-        //createTable();
 
-        Object[][] data={
-                {"The Dark Knight", 2008, 9.0, 1886938},
-                {"Star Wars", 2001, 8.1, 1313},
-                {"Inception", 1990, 10, 3131344}
+   public EmpList(String title){
 
-        };
+       super(title);
 
-        showTable.setModel(new DefaultTableModel(
-                data,
-                new String[]{"Title", "Year", "Rating", "Num Votes"}
-        ));
-        TableColumnModel columns= showTable.getColumnModel();
-        columns.getColumn(0).setMaxWidth(250);
 
-        DefaultTableCellRenderer ceneterRender=new DefaultTableCellRenderer();
-        ceneterRender.setHorizontalAlignment(JLabel.CENTER);
-        columns.getColumn(1).setCellRenderer(ceneterRender);
-        columns.getColumn(2).setCellRenderer(ceneterRender);
-        columns.getColumn(3).setCellRenderer(ceneterRender);
+       setBounds(100, 100,500,300);
 
-        BezarBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+       createTable();
+
+       btnBezar.addActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               setVisible(false);
+
+           }
+       });
+
+       this.setPreferredSize(new Dimension(400, 400));
+
+       this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+       this.setContentPane(controlPanel);
+
+
+       this.pack();
+
+   }
+
+   /*
+    public static void main(String[] args){
+        JFrame frame= new EmpList("Lista");
+
+        frame.setVisible(true);
     }
 
-    public JPanel getRootPanel(){
-        return controlPanel;
-    }
+    */
 
     public void createTable(){
 
-    }
-
-    public void CreateTable(){
-
-        /*
-        Object emptmn[]={"Jel", "Kód"};
-        EmpTM etm= new EmpTM(emptmn, 0);
-        String nev="", szid="", lak="", x="/t";
-        int kod=0, iq=0;
-        String sqlp="select kod, nev, szulido, lakohely, iq from emp";
-        try{
-            s=conn.createStatement();
-            rs=s.executeQuery(sqlp);
-            while(rs.next()){
-                kod=rs.getInt("kod");
-                nev=rs.getString("nev");
-                szid=rs.getString("szulido");
-                lak= rs.getString("lakohely");
-                iq=rs.getInt("iq");
-                //System.out.println("Lekérdezés:");
-                //SM(kod +" "+nev+" "+szid+" "+lak+" "+iq);
-                etm.addRow(new Object[]{false, kod, szid, lak, iq});
-            }
-        }catch (SQLException e){
-            SM(e.getMessage());
-        }
-        return etm;
-         */
-
         Object[][] data={
-                {"The Dark Knight", 2008, 9.0, 1886938},
-                {"Star Wars", 2001, 8.1, 1313},
-                {"Inception", 1990, 10, 3131344}
+                {31,"Jég Elek","1985.05.06","Miskolc",112},
+                {32,"Rossz Géza","1981.11.09","Miskolc",105},
+                {33,"Keksz Zoé","1993.02.13","Eger",125}
 
         };
 
-        showTable.setModel(new DefaultTableModel(
+        tabla.setModel(new DefaultTableModel(
                 data,
-                new String[]{"Title", "Year", "Rating", "Num Votes"}
+                new String[]{"Kód","Név","Szülidő","Lakóhely","IQ"}
         ));
-        TableColumnModel columns= showTable.getColumnModel();
+        TableColumnModel columns= tabla.getColumnModel();
         columns.getColumn(0).setMaxWidth(250);
 
         DefaultTableCellRenderer ceneterRender=new DefaultTableCellRenderer();
@@ -108,15 +74,4 @@ public class EmpList  {
         columns.getColumn(3).setCellRenderer(ceneterRender);
 
     }
-
-    public void SM(String msg)
-    {
-        //System.out.println(msg);
-        JOptionPane.showMessageDialog(null, msg, "ABKezelő üzenet", 2);
-    }
-
 }
-
-
-
-
