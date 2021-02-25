@@ -5,19 +5,78 @@ public class DbMethods {
 
     private Statement s = null;
     private Connection conn= null;
+    //private Connection connUser=null;
     private ResultSet rs= null;
 
 
     public void Connect() {
         try {
+
             String url="jdbc:sqlite:D:/Program Files (x86)/SQLite/empdb.db";
             conn = DriverManager.getConnection(url);
-            SM("Connection OK!");
+            SM("Connection EMP OK!");
+            //url="jdbc:sqlite:D:/Program Files (x86)/SQLite/user.db";
+            //SM("Connection USER OK!");
+
+
         } catch (SQLException e) {
 
             SM("Sikertelen driver regisztráció"+e.getMessage());
         }
 
+    }
+
+    public int Identification(String name, String pswd){
+
+        Connect();
+        int pc=1;
+        String sqlp="select(*) pc from user where name='"+name+"' and pswd='"+pswd+"';";
+
+        try{
+            s= conn.createStatement();
+            rs= s.executeQuery(sqlp);
+            while(rs.next()){
+                pc=rs.getInt("pc");
+            }
+            rs.close();
+        }catch (SQLException e) {
+            //SM(e.getMessage());
+             }
+
+        return pc;
+    }
+
+
+    /*
+    public void InsertWithPS(Emp[] emp){
+        int pc= 0;
+        String sqlp="insert into emp(kod, nev, szulido, lakohely, iq)"
+                    +"values(?,?,?,?,?)";
+        try{
+            ps=conn.prepareStatement(sqlp);
+            for(int i=0; i<emp.length; i++){
+                ps
+            }
+
+        }catch (SQLException e)
+        {
+            SM(e.getMessage());
+        }
+    }
+
+    */
+
+    public void CommandExec(String command){
+        Connect();
+        String sqlp=command;
+        try{
+            s = conn.createStatement();
+            s.execute(sqlp);
+            SM("Command OK!");
+
+        }catch (SQLException e){
+            SM("CommandExec:"+e.getMessage());
+        }
     }
 
     public void ReadAllData(){
